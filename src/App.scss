@@ -1,0 +1,587 @@
+$blue: rgb(0, 28, 168);
+$white: white;
+$black: black;
+$red: rgb(187, 19, 19);
+
+
+@keyframes bGroundAnimation1 {
+    0% {
+        transform: scaleY(0);
+        transform-origin: bottom;
+        opacity: 0;
+    }
+
+    100% {
+        transform: scaleY(1);
+        transform-origin: bottom;
+        background-color: $white;
+        opacity: 1;
+    }
+}
+
+@keyframes bGroundAnimation2 {
+    0% {
+        transform: scaleY(1);
+        transform-origin: bottom;
+        background-color: $white;
+        opacity: 1;
+    }
+
+    100% {
+        transform: scaleY(0);
+        transform-origin: bottom;
+        opacity: 0;
+    }
+}
+
+@keyframes menuAnimation1 {//  kolor tła menu
+    0% {
+        transform: scaleY(0);
+        transform-origin: top;
+        //background-color: white;
+        opacity: 0;
+    }
+
+    100% {
+        transform: scaleY(1);
+        transform-origin: top;
+        //background-color: rgb(255, 255, 255);
+        opacity: 1;
+    }
+}
+
+@keyframes menuAnimation2 {
+    0% {
+        transform: scaleY(1);
+        transform-origin: top;
+        background-color: white;
+        opacity: 1;
+    }
+
+    100% {
+        transform: scaleY(0);
+        transform-origin: top;
+        background-color: white;
+        opacity: 0;
+    }
+}
+
+@keyframes popupAnimation1 {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    } 
+}
+
+@keyframes popupAnimation2 {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    } 
+}
+
+.popupAnimation1 {
+    animation: popupAnimation1 0.5s forwards;
+    display: flex !important;
+}
+
+.popupAnimation2 {//nie dziala
+    animation: popupAnimation2 0.5s forwards;
+}
+
+.bGroundAnimation1 {
+    animation: bGroundAnimation1 0.3s forwards;
+}
+
+.bGroundAnimation2 {//dziala !
+    animation: bGroundAnimation2 0.3s forwards;
+}
+
+.menuAnimation1 {
+    animation: menuAnimation1 0.3s forwards;
+    display: flex !important;
+}
+
+.menuAnimation2 {//nie dziala
+    animation: menuAnimation2 10.3s forwards;
+    //display: none !important;
+}
+
+a {
+    text-decoration: none;
+    color: inherit; 
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    outline: none; 
+}
+
+.blue {
+    color: $blue !important;
+}
+
+.container {
+    background-color: rgb(132, 132, 132);
+    height: 100vh;
+}
+
+.nav-short {
+    display: grid;
+    grid-template: 2/9;
+    background-color: $blue;
+    height: 65px;
+
+    .logo {
+        max-height: 25px;
+        margin-top: 20px;
+    }
+
+    .navElement {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        align-self: center;
+        color: rgb(255, 255, 255);
+        cursor: pointer;
+        user-select: none;
+        position: relative;
+        padding: 10px;
+        margin: 0 10px;
+
+        .navElemText {
+            position: relative;
+            z-index: 1;
+            font-size: 12px;
+            font-weight: 500;
+            &:hover {
+                text-decoration: underline; 
+            }
+        }
+    }
+
+    .navPop {
+        grid-area: 1/2/1/2;
+        
+        .dArrow {
+            height: 12px;
+            color: white;
+        }
+    }
+    
+    .navPopActive {
+        grid-area: 1/2/1/2;
+        z-index: 0;
+        height: 65px;
+    }
+
+    .popMenu {
+        grid-area: 2/1/2/10;
+        height: calc(100vh - 65px);
+        opacity: 0;
+        display: none;
+        grid-template: 2/4;
+               
+        .popMenuTitle {
+            border: solid 1px yellow;
+            height: 100px;
+            width: 800px;
+            
+        }
+
+        .xRed1 {
+            height: 50px;
+            cursor: pointer;
+            grid-area: 1/4/1/4;
+            top: 40px;
+            left: 1400px;
+        }
+
+        .destinations {
+            display: flex;
+            grid-area: 2/1/2/5;
+            border: solid 1px red;
+            
+            .zachodnia {
+
+                .dest {
+                    text-decoration: underline;
+                    cursor: pointer;
+                }
+            }
+
+            .wschodnia {
+
+                .dest {
+                    text-decoration: underline;
+                    cursor: pointer;
+                }
+            }
+
+            .srodziemno {
+
+                .dest {
+                    text-decoration: underline;
+                    cursor: pointer;
+                }
+            }
+
+            .wschod {
+
+                .dest {
+                    text-decoration: underline;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    .navHotel {
+        grid-area: 1/3/1/3;
+    }
+
+    .navCar {
+        grid-area: 1/4/1/4;
+    }
+
+    .navPlan {
+        grid-area: 1/5/1/5;
+
+        .dArrow {
+            height: 12px;
+            color: white;
+        }
+    }
+
+    .navPlanActive {
+        grid-area: 1/5/1/5;
+        height: 65px;
+    }
+
+    .planMenu {
+        grid-area: 2/1/2/10;
+        opacity: 0;
+        display: none;
+
+        .planMenuTitle1 {
+
+        }
+
+        .xRed2 {
+
+        }
+
+        .planIcon {
+            max-width: 60px;
+        }
+        
+        .planOptions1 {
+
+
+
+            .option1 {
+                
+                .airplanePlan {
+                    
+                }
+            }
+        }
+
+        .planOptions2 {
+
+        }
+    }
+
+    .navInfo {
+        grid-area: 1/6/1/6;
+
+        .dArrow {
+            height: 12px;
+            color: white;
+        }
+    }
+
+    .navInfoActive {
+        grid-area: 1/6/1/6;
+        //z-index: 0;
+        height: 65px;
+    }
+
+    .infoMenu {
+        grid-area: 2/1/2/10;
+        opacity: 0;
+        display: none;
+
+        .infoMenuTitle {
+
+        }
+
+        .infoList {
+            display: flex;
+
+            .infoListCol1 {
+
+                .infoItem1 {
+                    color: $red;                
+    
+                    .infoItem1title {
+                        color: $blue;
+                    }
+                }
+    
+                .infoItem2 {
+                    color: $red;
+                   
+                    .infoItem2title {
+                        color: $blue;
+                    }
+                }
+    
+                .infoItem3 {
+                    color: $red;
+    
+                    .infoItem3title {
+                        color: $blue;
+                    }
+                }
+
+            }
+
+            .infoListCol2 {
+
+                .infoItem4 {
+                    color: $red;
+    
+                    .infoItem4title {
+                        color: $blue;
+                    }
+                }
+    
+                .infoItem5 {
+                    color: $red;
+    
+                    .infoItem5title {
+                        color: $blue;
+                    }
+                }
+            }
+
+            .infoListCol3 {
+
+                .infoItem6 {
+                    color: $red;
+    
+                    .infoItem6title {
+                        color: $blue;
+                    }
+                }
+
+                .infoItem7 {
+                    color: $red;
+    
+                    .infoItem7title {
+                        color: $blue;
+                    }
+                }
+            }
+
+            .infoListCol4 {
+
+                .infoItem8 {
+                    color: $red;
+    
+                    .infoItem58title {
+                        color: $blue;
+                    }
+                }
+
+                .infoItem9 {
+                    color: $red;
+    
+                    .infoItem9title {
+                        color: $blue;
+                    }
+                }
+
+                .infoItem10 {
+                    color: $red;
+    
+                    .infoItem10title {
+                        color: $blue;
+                    }
+                }
+            }
+
+            .infoItem6 {
+                color: $red;
+
+                .infoItem6title {
+                    color: $blue;
+                }
+            }
+
+            .infoItem7 {
+                color: $red;
+
+                .infoItem7title {
+                    color: $blue;
+                }
+            }
+
+            .infoItem8 {
+                color: $red;
+
+                .infoItem8title {
+                    color: $blue;
+                }
+            }
+
+            .infoItem9 {
+                color: $red;
+
+                .infoItem9title {
+                    color: $blue;
+                }
+            }
+        }
+    }
+
+    .navBrief {
+        grid-area: 1/7/1/7;
+    }
+
+    .navLog {
+        grid-area: 1/8/1/8;
+    }
+
+    .navLang {
+        grid-area: 1/9/1/9;
+
+        .gbflag {
+            width: 25px;
+        }
+    }
+        
+    .briefPopup {
+        flex-direction: column;
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        opacity: 0;
+        display: none;
+
+        .briefPop1 {
+            display: flex;
+
+            .briefPop2 {
+
+            }
+
+            .xRed3 {
+                height: 50px;
+                cursor: pointer;
+            }
+        }
+
+        .briefPop3 {
+
+        }
+
+        .briefPop4 {
+
+        }
+
+        .briefPop5 {
+
+        }
+
+        .briefPop6 {
+
+            .briefPop7 {
+
+            }
+
+            .briefPop8 {
+
+            }
+        }
+    }
+    
+}
+
+.loginPopup {
+    flex-direction: column;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    opacity: 0;
+    display: none;
+
+    .loginPopup1 {
+
+        .loginPop2{
+
+        }
+
+        .xRed4 {
+            height: 50px;
+            cursor: pointer;
+        }
+    }
+
+    .loginPopup3 {
+
+    }
+
+    .loginPopup4 {
+
+        .loginPopup4a {
+
+        }
+
+        .eyePink {
+            height: 20px;
+            cursor: pointer;
+            opacity: 60%;
+        }
+
+        .eye {
+            height: 20px;
+            cursor: pointer;
+            opacity: 60%;
+        }
+    }
+}
+
+.activePopup {
+    overflow-y: hidden;
+}
+
+.backgroundBrief {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    opacity: 70%;
+}
+
+.backgroundFont {
+    color: rgb(92, 92, 92);
+    pointer-events: none;
+}
+
+.dArrow {
+    height: 12px;
+    color: white;
+}
