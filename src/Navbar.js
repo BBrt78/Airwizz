@@ -4,6 +4,9 @@ import {Link} from 'react-router-dom';
 import {Samochody} from './Samochody';
 import logoWhite from './img/logoWhite.png';
 import downArrowW from './img/downArrowW.png';
+import upArrowW from './img/upArrowW.png';
+import downArrowB from './img/downArrowB.png';
+import upArrowB from './img/upArrowB.png';
 import gbflag from './img/gbflag.png';
 import xRed from './img/xRed.png';
 import parkingPlan from './img/parkingPlan.png';
@@ -17,18 +20,23 @@ import hotelsPlan from './img/hotelsPlan.png';
 import carPlan from './img/carPlan.png';
 import eye from './img/eye.png';
 import eyePink from './img/eyePink.png';
+import downArrowGrey from './img/downArrowGrey.png';
 
 export function Navbar() {
     const navbarRef = useRef(null);
     const [menuVisible, setMenuVisible] = useState(false);
     const [eyeOpen, setEyeOpen] = useState(false);
+    const [arrowDown1, setArrowDown1] = useState(true);
+    const [arrowDown2, setArrowDown2] = useState(true);
+    const [arrowDown3, setArrowDown3] = useState(true);
+    const [briefShowed, setBriefShowed] = useState(false);
 
 const navPopClick = () => {
+    setArrowDown1(!arrowDown1);
     if (!document.getElementById('navPopActiveId').classList.contains('bGroundAnimation1')) {//pokaz menu
         document.getElementById('navPopActiveId').classList.remove('bGroundAnimation2');
         document.getElementById('navPopActiveId').classList.add('bGroundAnimation1');
         document.getElementById('navPopTextId').classList.add('blue');
-        document.getElementById('arrowId1').classList.add('blue');
         document.getElementById('popMenuId').classList.remove('menuAnimation2');
         document.getElementById('popMenuId').classList.add('menuAnimation1');
         document.getElementById('planMenuId').classList.remove('menuAnimation1');
@@ -38,7 +46,6 @@ const navPopClick = () => {
         document.getElementById('navPopActiveId').classList.remove('bGroundAnimation1');
         document.getElementById('navPopActiveId').classList.add('bGroundAnimation2');
         document.getElementById('navPopTextId').classList.remove('blue');
-        document.getElementById('arrowId1').classList.remove('blue');
         document.getElementById('popMenuId').classList.remove('menuAnimation1');
         document.getElementById('popMenuId').classList.add('menuAnimation2');
     }
@@ -47,23 +54,24 @@ const navPopClick = () => {
         document.getElementById('navPlanActiveId').classList.remove('bGroundAnimation1');
         document.getElementById('navPlanActiveId').classList.add('bGroundAnimation2');
         document.getElementById('navPlanTextId').classList.remove('blue');
-        document.getElementById('arrowId2').classList.remove('blue');   
+        setArrowDown2(!arrowDown2);
+
     }
 
     if (document.getElementById('navInfoActiveId').classList.contains('bGroundAnimation1')) {
         document.getElementById('navInfoActiveId').classList.remove('bGroundAnimation1');
         document.getElementById('navInfoActiveId').classList.add('bGroundAnimation2');
         document.getElementById('navInfoTextId').classList.remove('blue');
-        document.getElementById('arrowId3').classList.remove('blue');
+        setArrowDown3(!arrowDown3);
     }
 }
 
 const navPlanClick = () => {
+    setArrowDown2(!arrowDown2);
     if (!document.getElementById('navPlanActiveId').classList.contains('bGroundAnimation1')) {
         document.getElementById('navPlanActiveId').classList.remove('bGroundAnimation2');
         document.getElementById('navPlanActiveId').classList.add('bGroundAnimation1');
         document.getElementById('navPlanTextId').classList.add('blue');
-        document.getElementById('arrowId2').classList.add('blue');
         document.getElementById('planMenuId').classList.remove('menuAnimation2');
         document.getElementById('planMenuId').classList.add('menuAnimation1');
         document.getElementById('popMenuId').classList.remove('menuAnimation1');
@@ -73,7 +81,6 @@ const navPlanClick = () => {
         document.getElementById('navPlanActiveId').classList.remove('bGroundAnimation1');
         document.getElementById('navPlanActiveId').classList.add('bGroundAnimation2');
         document.getElementById('navPlanTextId').classList.remove('blue');
-        document.getElementById('arrowId2').classList.remove('blue');
         document.getElementById('planMenuId').classList.remove('menuAnimation1');
         document.getElementById('planMenuId').classList.add('menuAnimation2');
     }
@@ -82,23 +89,23 @@ const navPlanClick = () => {
         document.getElementById('navPopActiveId').classList.remove('bGroundAnimation1');
         document.getElementById('navPopActiveId').classList.add('bGroundAnimation2');
         document.getElementById('navPopTextId').classList.remove('blue');
-        document.getElementById('arrowId1').classList.remove('blue');
+        setArrowDown1(!arrowDown1);
     }
 
     if (document.getElementById('navInfoActiveId').classList.contains('bGroundAnimation1')) {
         document.getElementById('navInfoActiveId').classList.remove('bGroundAnimation1');
         document.getElementById('navInfoActiveId').classList.add('bGroundAnimation2');
         document.getElementById('navInfoTextId').classList.remove('blue');
-        document.getElementById('arrowId3').classList.remove('blue');
+        setArrowDown3(!arrowDown3);
     }
 }
 
 const navInfoClick = () => {
+    setArrowDown3(!arrowDown3);
     if (!document.getElementById('navInfoActiveId').classList.contains('bGroundAnimation1')) {
         document.getElementById('navInfoActiveId').classList.remove('bGroundAnimation2');
         document.getElementById('navInfoActiveId').classList.add('bGroundAnimation1');
         document.getElementById('navInfoTextId').classList.add('blue');
-        document.getElementById('arrowId3').classList.add('blue');
         document.getElementById('infoMenuId').classList.remove('menuAnimation2');
         document.getElementById('infoMenuId').classList.add('menuAnimation1');
         document.getElementById('popMenuId').classList.remove('menuAnimation1');
@@ -108,7 +115,6 @@ const navInfoClick = () => {
         document.getElementById('navInfoActiveId').classList.remove('bGroundAnimation1');
         document.getElementById('navInfoActiveId').classList.add('bGroundAnimation2');
         document.getElementById('navInfoTextId').classList.remove('blue');
-        document.getElementById('arrowId3').classList.remove('blue');
         document.getElementById('infoMenuId').classList.remove('menuAnimation1');
         document.getElementById('infoMenuId').classList.add('menuAnimation2');
     }
@@ -117,14 +123,14 @@ const navInfoClick = () => {
         document.getElementById('navPopActiveId').classList.remove('bGroundAnimation1');
         document.getElementById('navPopActiveId').classList.add('bGroundAnimation2');
         document.getElementById('navPopTextId').classList.remove('blue');
-        document.getElementById('arrowId1').classList.remove('blue');
+        setArrowDown1(!arrowDown1);
     }
 
     if (document.getElementById('navPlanActiveId').classList.contains('bGroundAnimation1')) {
         document.getElementById('navPlanActiveId').classList.remove('bGroundAnimation1');
         document.getElementById('navPlanActiveId').classList.add('bGroundAnimation2');
         document.getElementById('navPlanTextId').classList.remove('blue');
-        document.getElementById('arrowId2').classList.remove('blue');
+        setArrowDown2(!arrowDown2);
     }
 }
 
@@ -170,8 +176,8 @@ const showPopup = () => {//wyskakujace okienko - odprawa
         document.getElementById('briefPopupId').classList.remove('popupAnimation2');
         document.getElementById('briefPopupId').classList.add('popupAnimation1');
         document.getElementById('backgroundBriefId').classList.add('backgroundBrief');
-        
-        
+        setBriefShowed(true);
+                
     } else if (!document.getElementById('briefPopupId').classList.contains('popupAnimation2')) {
         document.getElementById('navPopTextId').classList.remove('backgroundFont');
         document.getElementById('navHotelTextId').classList.remove('backgroundFont');
@@ -182,11 +188,12 @@ const showPopup = () => {//wyskakujace okienko - odprawa
         document.getElementById('navLogTextId').classList.remove('backgroundFont');
         document.getElementById('briefPopupId').classList.remove('popupAnimation1');
         document.getElementById('briefPopupId').classList.add('popupAnimation2');
-        document.getElementById('backgroundBriefId').classList.remove('backgroundBrief');                         
+        document.getElementById('backgroundBriefId').classList.remove('backgroundBrief');
+        setBriefShowed(false);                    
     }
 }
 
-const showLogin = () => {
+const showLogin = () => {//okienko login
     if (!document.getElementById('loginPopupId').classList.contains('popupAnimation1')) {
         document.getElementById('navPopTextId').classList.add('backgroundFont');
         document.getElementById('navHotelTextId').classList.add('backgroundFont');
@@ -198,6 +205,7 @@ const showLogin = () => {
         document.getElementById('loginPopupId').classList.remove('popupAnimation2');
         document.getElementById('loginPopupId').classList.add('popupAnimation1');
         document.getElementById('backgroundBriefId').classList.add('backgroundBrief');
+        setBriefShowed(true);
 
     } else if (!document.getElementById('loginPopupId').classList.contains('popupAnimation2')) {
         document.getElementById('navPopTextId').classList.remove('backgroundFont');
@@ -209,7 +217,8 @@ const showLogin = () => {
         document.getElementById('navLogTextId').classList.remove('backgroundFont');
         document.getElementById('loginPopupId').classList.remove('popupAnimation1');
         document.getElementById('loginPopupId').classList.add('popupAnimation2');
-        document.getElementById('backgroundBriefId').classList.remove('backgroundBrief'); 
+        document.getElementById('backgroundBriefId').classList.remove('backgroundBrief');
+        setBriefShowed(false); 
     }
 }
                 
@@ -220,7 +229,15 @@ const showLogin = () => {
             </Link>
             <div className='navPop navElement' onClick={navPopClick}>
                 <div className='navPopText navElemText' id='navPopTextId'>NAJBARDZIEJ POPULARNE LOTY</div>
+                {arrowDown1 ?
+                (briefShowed ?
+                <img src={downArrowGrey} alt='downArrow' className='dArrow' id='arrowIdg'/>
+                :
                 <img src={downArrowW} alt='downArrow' className='dArrow' id='arrowId1'/>
+                )
+                :
+                <img src={upArrowB} alt='upArrow' className='upArrow' id='arrowId1b'/>
+                }
             </div>
             <div className='navPopActive' id='navPopActiveId' onClick={navPopClick}></div>
             <div className='popMenu' id='popMenuId'>
@@ -257,21 +274,31 @@ const showLogin = () => {
                     </div>
                 </div> 
             </div>
-            <div className='navHotel navElement' onClick={null}>
-                <div className='navHotelText navElemText'><a href='https://www.booking.com/index.pl.html' target='_blank'>HOTELE</a></div>
+            <div className='navHotel navElement'>
+                <div className='navHotelText navElemText' id='navHotelTextId'>
+                    <a href='https://www.booking.com/index.pl.html' target='_blank'>HOTELE</a>
+                </div>
             </div>
-            <div className='navHotelActive' onClick={null}></div>
+            <div className='navHotelActive'></div>
 
-            <div className='navCar navElement' onClick={null}>
+            <div className='navCar navElement'>
                 <Link to='samochody'>
                     <div className='navCarText navElemText' id='navCarTextId'>SAMOCHODY</div>
                 </Link>
             </div>
-            <div className='navCarActive' onClick={null}></div>
+            <div className='navCarActive'></div>
 
             <div className='navPlan navElement' onClick={navPlanClick}>
                 <div className='navPlanText navElemText' id='navPlanTextId'>ZAPLANUJ</div>
+                {arrowDown2 ?
+                (briefShowed ?
+                <img src={downArrowGrey} alt='downArrow' className='dArrow' id='arrowIdg'/>
+                :
                 <img src={downArrowW} alt='downArrow' className='dArrow' id='arrowId2'/>
+                )
+                :
+                <img src={upArrowB} alt='upArrow' className='upArrow' id='arrowId2b'/>
+                }
             </div>
             <div className='navPlanActive' id='navPlanActiveId' onClick={navPlanClick}></div>
             <div className='planMenu' id='planMenuId'>
@@ -331,7 +358,15 @@ const showLogin = () => {
 
             <div className='navInfo navElement' onClick={navInfoClick}>
                 <div className='navInfoText navElemText' id='navInfoTextId'>INFORMACJE I USŁUGI</div>
+                {arrowDown3 ?
+                (briefShowed ?
+                <img src={downArrowGrey} alt='downArrow' className='dArrow' id='arrowIdg'/>
+                :
                 <img src={downArrowW} alt='downArrow' className='dArrow' id='arrowId3'/>
+                )
+                :
+                <img src={upArrowB} alt='upArrow' className='upArrow' id='arrowId3b'/>
+                }
             </div>
             <div className='navInfoActive' id='navInfoActiveId' onClick={navInfoClick}></div>
             <div className='infoMenu' id='infoMenuId'>
@@ -474,9 +509,9 @@ const showLogin = () => {
                 <div className='loginPopup4'>
                     <input type='text' className='loginPopup4a' placeholder='Hasło'></input>
                     {eyeOpen ? 
-                    <img src={eyePink} alt='eye' className='eyePink' onClick={eye} />
+                    <img src={eyePink} alt='eye' className='eyePink' onClick={null} />
                     :
-                    <img src={eye} alt='eye' className='eye' onClick={eye} />
+                    <img src={eye} alt='eye' className='eye' onClick={null} />
                     }
                 </div>
                 <div className='loginPopup5'>NIE PAMIĘTASZ HASŁA?</div>
