@@ -164,6 +164,16 @@ useEffect(() => {//zamykanie menu clickiem na container
     };
 }, [])
 
+const displayNone = () => {
+    document.getElementById('briefPopupId').classList.contains('popupAnimation1') ?
+    document.getElementById('briefPopupId').classList.remove('displayNone') :
+    document.getElementById('briefPopupId').classList.add('displayNone');
+
+    document.getElementById('loginPopupId').classList.contains('popupAnimation1') ?
+    document.getElementById('loginPopupId').classList.remove('displayNone') :
+    document.getElementById('loginPopupId').classList.add('displayNone');
+}
+
 const showPopup = () => {//wyskakujace okienko - odprawa
     if (!document.getElementById('briefPopupId').classList.contains('popupAnimation1')) {
         document.getElementById('navPopTextId').classList.add('backgroundFont');
@@ -191,6 +201,7 @@ const showPopup = () => {//wyskakujace okienko - odprawa
         document.getElementById('backgroundBriefId').classList.remove('backgroundBrief');
         setBriefShowed(false);                    
     }
+    setTimeout(displayNone, 200);
 }
 
 const showLogin = () => {//okienko login
@@ -220,6 +231,7 @@ const showLogin = () => {//okienko login
         document.getElementById('backgroundBriefId').classList.remove('backgroundBrief');
         setBriefShowed(false); 
     }
+    setTimeout(displayNone, 200);
 }
                 
     return (
@@ -470,20 +482,20 @@ const showLogin = () => {//okienko login
                 </div>
             </div>
 
-            <div className='navBrief navElement' id='navBriefId' onClick={null}>
+            <div className='navBrief navElement' id='navBriefId'>
                 <div className='navBriefText navElemText' id='navBriefTextId' onClick={showPopup}>ODPRAWA I REZERWACJE</div>
             </div>
-            <div className='navBriefActive' id='navBriefActiveId' onClick={null}></div>
+            <div className='navBriefActive' id='navBriefActiveId'></div>
 
-            <div className='navLog navElement' id='navLogId' onClick={null}>
+            <div className='navLog navElement' id='navLogId'>
                 <div className='navLogText navElemText' id='navLogTextId' onClick={showLogin}>ZALOGUJ SIĘ</div>
             </div>
-            <div className='navLogActive' id='navLogActiveId' onClick={null}></div>
+            <div className='navLogActive' id='navLogActiveId'></div>
 
-            <div className='navLang navElement' id='navLangId' onClick={null}>  
-                <img src={gbflag} alt='gbflag' className='gbflag' id='gbflagId' onClick={null}></img>
+            <div className='navLang navElement' id='navLangId'>  
+                <img src={gbflag} alt='gbflag' className='gbflag' id='gbflagId'></img>
             </div>
-            <div className='navLangActive' id='navLangActiveId' onClick={null}></div>
+            <div className='navLangActive' id='navLangActiveId'></div>
             
             <div id='backgroundBriefId'></div>
             <div className='briefPopup' id='briefPopupId'>
