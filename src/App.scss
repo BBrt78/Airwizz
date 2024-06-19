@@ -45,7 +45,7 @@ $red: rgb(187, 19, 19);
     100% {
         transform: scaleY(1);
         transform-origin: top;
-        background-color: white;
+        background-color: rgb(119, 119, 119);
         opacity: 1;
     }
 }
@@ -105,30 +105,30 @@ $red: rgb(187, 19, 19);
 }
 
 .popupAnimation1 {
-    animation: popupAnimation1 0.3s forwards;
+    animation: popupAnimation1 0.2s forwards;
     display: block !important;
 }
 
 .popupAnimation2 {
-    animation: popupAnimation2 0.3s forwards;
+    animation: popupAnimation2 0.2s forwards;
     display: block !important;
 }
 
 .bGroundAnimation1 {
-    animation: bGroundAnimation1 0.3s forwards;
+    animation: bGroundAnimation1 0.2s forwards;
 }
 
 .bGroundAnimation2 {
-    animation: bGroundAnimation2 0.3s forwards;
+    animation: bGroundAnimation2 0.2s forwards;
 }
 
 .menuAnimation1 {
-    animation: menuAnimation1 0.3s forwards;
+    animation: menuAnimation1 0.2s forwards;
     display: block !important;
 }
 
 .menuAnimation2 {
-    animation: menuAnimation2 0.3s forwards;
+    animation: menuAnimation2 0.2s forwards;
     display: block !important;
 }
 
@@ -137,7 +137,26 @@ $red: rgb(187, 19, 19);
     cursor: default !important;
 }
 
+a {
+    text-decoration: none;
+    color: inherit; 
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    outline: none; 
+}
 
+.blue {
+    color: $blue !important;
+}
+
+.displayNone {
+    display: none !important;
+}
+
+//  Container
 .container {
     background-color: rgb(145, 145, 145);
     height: 100vh;
@@ -152,14 +171,15 @@ $red: rgb(187, 19, 19);
             width: 100%;
         }
     }
+    
     .onSlides {
-        border: solid 1px green;
         width: 85vw;
         height: 200px;
         position: absolute;
         left: 50%;
         top: 100px;
         transform: translateX(-50%);
+        z-index: 2;// ma byc 2
 
         .menu {
             display: flex;
@@ -211,28 +231,8 @@ $red: rgb(187, 19, 19);
     }
 }
 
-a {
-    text-decoration: none;
-    color: inherit; 
-    background: none;
-    border: none;
-    padding: 0;
-    margin: 0;
-    font: inherit;
-    outline: none; 
-}
-
-.blue {
-    color: $blue !important;
-}
-
-.displayNone {
-    display: none !important;
-}
-
 //  Navbar
-
-.nav-short {
+.nav {
     display: grid;
     //grid-template: 2/8;
     background-color: $blue;
@@ -240,8 +240,8 @@ a {
 
     .logo {
         max-height: 25px;
-        margin-top: 20px;
-        margin-left: 20px;
+        margin: 20px 150px 20px 30px;
+        justify-self: start;
     }
 
     .navElement {
@@ -253,9 +253,8 @@ a {
         cursor: pointer;
         user-select: none;
         position: relative;
-        padding: 10px;
+        padding: 5px 0;
         margin: 0 10px;
-        border: solid 1px red;
 
         .navElemText {
             position: relative;
@@ -270,6 +269,10 @@ a {
 
     .navPop {
         grid-area: 1/2/1/2;
+        min-width: 180px;
+
+        .navPopText {
+        }
         
         .dArrow, .upArrow {
             height: 12px;
@@ -290,7 +293,7 @@ a {
         opacity: 0;
         display: none;
         grid-template: 2/4;
-        z-index: 2;
+        z-index: 3;
                
         .popMenuTitle {
             border: solid 1px yellow;
@@ -348,14 +351,17 @@ a {
 
     .navHotel {
         grid-area: 1/3/1/3;
+        min-width: 30px;
     }
 
     .navCar {
         grid-area: 1/4/1/4;
+        min-width: 60px;
     }
 
     .navPlan {
         grid-area: 1/5/1/5;
+        min-width: 60px;
 
         .dArrow, .upArrow {
             height: 12px;
@@ -373,7 +379,7 @@ a {
         grid-area: 2/1/2/10;
         opacity: 0;
         display: none;
-        z-index: 2;
+        z-index: 3;
 
         .planMenuTitle1 {
 
@@ -406,6 +412,7 @@ a {
 
     .navInfo {
         grid-area: 1/6/1/6;
+        min-width: 130px;
 
         .dArrow, .upArrow {
             height: 12px;
@@ -423,7 +430,7 @@ a {
         grid-area: 2/1/3/10;
         opacity: 0;
         display: block;
-        z-index: 2;
+        z-index: 3;
 
         .infoMenuTitle {
 
@@ -561,10 +568,12 @@ a {
 
     .navBrief {
         grid-area: 1/7/1/7;
+        min-width: 130px;
     }
 
     .navLog {
         grid-area: 1/8/1/8;
+        min-width: 60px;
     }
 
     .navLang {
@@ -584,7 +593,7 @@ a {
         background-color: white;
         opacity: 0;
         display: none;
-        z-index: 3; // ma zostac 3
+        z-index: 4; // ma zostac 4
 
         .briefPop1 {
             display: flex;
@@ -634,7 +643,7 @@ a {
     background-color: white;
     opacity: 0;
     display: none;
-    z-index: 2; // ma zostac 2
+    z-index: 4; // ma zostac 4
 
     .loginPopup1 {
 

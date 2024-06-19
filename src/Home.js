@@ -17,7 +17,9 @@ export function Home() {
                     <img src={plane2} alt='plane2' className='plane2 plane'/>, 
                     <img src={plane3} alt='plane3' className='plane3 plane'/>];
     const [slidesContent, setSlidesContent] = useState(null);
-    const [activeMenu, setActiveMenu] = useState('menu1')
+    const [activeMenu, setActiveMenu] = useState('menu1');
+    const [checked1, setChecked1] = useState(true);
+    const [checked2, setChecked2] = useState(false);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -61,6 +63,7 @@ export function Home() {
                     return (
                     <div className='onSLidesInCont3'>3switch</div>
                     );
+                
                 default:
                     return (
                         <div className='onSLidesInCont1'>1switch</div>
@@ -68,7 +71,22 @@ export function Home() {
             }
         }
         setSlidesContent(slidesContentF())
-    }    
+    };
+
+    const checked = (event) => {
+        switch (event.target.id) {
+            case 'radio1':
+                    setChecked1(true);
+                    setChecked2(false);
+            break;
+            case 'radio2':
+                    setChecked2(true);
+                    setChecked1(false);
+            break;
+            default:
+                return null;
+        }
+    }
 
     return (
         <div className='container'>
@@ -111,9 +129,9 @@ export function Home() {
                      slidesContent:
                      <div className='onSLidesInCont1'>
                         <div className='radioBtns'>
-                            <input type='radio' id='radio1' checked/>
+                            <input type='radio' id='radio1' checked={checked1} onClick={checked}/>
                             <label for='radio1'>Powrotny</label>
-                            <input type='radio' id='radio2' />
+                            <input type='radio' id='radio2' checked={checked2} onClick={checked}/>
                             <label for='radio2'>W jedną stronę</label>
                         </div>
                      </div>
