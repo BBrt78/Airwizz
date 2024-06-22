@@ -20,6 +20,15 @@ export function Home() {
     const [activeMenu, setActiveMenu] = useState('menu1');
     const [checked1, setChecked1] = useState(true);
     const [checked2, setChecked2] = useState(false);
+    const cities = ["Amsterdam", "Andora la Vella", "Ateny", "Belgrad", "Berlin", "Bruksela", "Budapeszt",
+                    "Bukareszt", "Chisinau", "Dublin", "Erywań", "Helsinki", "Lisbona", "Ljubljana",
+                    "Londyn", "Luksemburg", "Madryt", "Monako", "Nikozja", "Oslo", "Paryż", "Podgorica",
+                    "Pristina", "Praga", "Reykjavik", "Ryga", "San Marino", "Sarajewo", "Skopje",
+                    "Sofia", "Sztokholm", "Tallinn", "Tbilisi", "Tirana", "Valletta", "Vaduz", "Warszawa",
+                    "Wilno", "Wiedeń", "Zagrzeb"];
+    const [cityInput, setCityInput] = useState('');
+    const citiesRef = useRef(null);
+    const citiesListRef = useRef(null);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -53,7 +62,29 @@ export function Home() {
             switch (event.currentTarget.id) {  //na podstawie id kliknietego tytulu menu wyswietla jego div ponizej
                 case 'onSlidesMenu1Id':
                     return (
-                    <div className='onSLidesInCont1'>1switch</div>
+                        <div className='onSLidesInCont1'>
+                        <div className='radioBtns'>
+                            <input type='radio' id='radio1' checked={checked1} onClick={checked}/>
+                            <label htmlFor='radio1'>Powrotny</label>
+                            <input type='radio' id='radio2' checked={checked2} onClick={checked}/>
+                            <label htmlFor='radio2'>W jedną stronę</label>
+                        </div>
+
+                        <div className='inputs'>
+                            <input 
+                                className='input1'
+                                type='text' 
+                                placeholder='Miejsce wylotu' 
+                                onChange={handleChange} 
+                                value={cityInput}
+                                onClick={showList}
+                                ref={citiesRef}
+                                />
+                            <div className='cities' id='citiesId' ref={citiesListRef}>
+                                {cities.map((element, index) => <><div className='city' key={index}>{element}</div></>)}
+                            </div>
+                        </div>
+                     </div>
                     );
                 case 'onSlidesMenu2Id':
                     return (
@@ -87,6 +118,34 @@ export function Home() {
                 return null;
         }
     }
+    
+    const showList = () => {
+            document.getElementById('citiesId').classList.remove('citiesAnimation2');
+            document.getElementById('citiesId').classList.add('citiesAnimation1');      
+    }
+
+    const handleChange = (event) => {
+        setCityInput(event.target.value)
+    }
+
+    useEffect(() => {
+        const closeCities = (event) => {
+            if (citiesRef.current && 
+                citiesListRef.current && 
+                !citiesRef.current.contains(event.target) && 
+                !citiesListRef.current.contains(event.target) &&
+                document.getElementById('citiesId').classList.contains('citiesAnimation1')) 
+                {
+                document.getElementById('citiesId').classList.remove('citiesAnimation1');
+                document.getElementById('citiesId').classList.add('citiesAnimation2');
+                setTimeout(() => {document.getElementById('citiesId').style.setProperty('display', 'none')}, 200);
+            }
+        }
+        document.addEventListener('click', closeCities);
+        return () => {
+            document.removeEventListener('click', closeCities)
+        }
+    }, [])
 
     return (
         <div className='container'>
@@ -130,9 +189,24 @@ export function Home() {
                      <div className='onSLidesInCont1'>
                         <div className='radioBtns'>
                             <input type='radio' id='radio1' checked={checked1} onClick={checked}/>
-                            <label for='radio1'>Powrotny</label>
+                            <label htmlFor='radio1'>Powrotny</label>
                             <input type='radio' id='radio2' checked={checked2} onClick={checked}/>
-                            <label for='radio2'>W jedną stronę</label>
+                            <label htmlFor='radio2'>W jedną stronę</label>
+                        </div>
+
+                        <div className='inputs'>
+                            <input 
+                                className='input1'
+                                type='text' 
+                                placeholder='Miejsce wylotu' 
+                                onChange={handleChange} 
+                                value={cityInput}
+                                onClick={showList}
+                                ref={citiesRef}
+                                />
+                            <div className='cities' id='citiesId' ref={citiesListRef}>
+                                {cities.map((element, index) => <><div className='city' key={index}>{element}</div></>)}
+                            </div>
                         </div>
                      </div>
                     }
@@ -141,3 +215,43 @@ export function Home() {
         </div>
     )
 }
+
+//lista reagujaca na wpisywane litery
+
+// const cities = [
+//     "Amsterdam",
+//     "Athens"];
+  
+//   const CitySearch = () => {
+//     const [searchTerm, setSearchTerm] = useState('');
+//     const [filteredCities, setFilteredCities] = useState(cities);
+  
+//     const handleInputChange = (event) => {
+//       const value = event.target.value.toLowerCase();
+//       setSearchTerm(value);
+  
+//       if (value === '') {
+//         setFilteredCities(cities);
+//       } else {
+//         const startsWith = cities.filter(city => city.toLowerCase().startsWith(value));
+//         const contains = cities.filter(city => !city.toLowerCase().startsWith(value) && city.toLowerCase().includes(value));
+//         setFilteredCities([...startsWith, ...contains]);
+//       }
+//     };
+  
+//     return (
+//       <div>
+//         <input
+//           type="text"
+//           value={searchTerm}
+//           onChange={handleInputChange}
+//           placeholder="Enter city name"
+//         />
+//         <ul>
+//           {filteredCities.map((city, index) => (
+//             <li key={index}>{city}</li>
+//           ))}
+//         </ul>
+//       </div>
+//     );
+//   };
