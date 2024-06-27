@@ -10,6 +10,7 @@ import bedW from './img/bedW.png';
 import planeB from './img/planeB.png';
 import carB from './img/carB.png';
 import bedB from './img/bedB.png';
+import arrowLateral from './img/arrowLateral.png';
 
 export function Home() {
     const  [currentIndex, setCurrentIndex] = useState(0);
@@ -20,15 +21,25 @@ export function Home() {
     const [activeMenu, setActiveMenu] = useState('menu1');
     const [checked1, setChecked1] = useState(true);
     const [checked2, setChecked2] = useState(false);
-    const cities = ["Amsterdam", "Andora la Vella", "Ateny", "Belgrad", "Berlin", "Bruksela", "Budapeszt",
+    const [cities, setCities] = useState(["Amsterdam", "Andora la Vella", "Ateny", "Belgrad", "Berlin", "Bruksela", "Budapeszt",
                     "Bukareszt", "Chisinau", "Dublin", "Erywań", "Helsinki", "Lisbona", "Ljubljana",
                     "Londyn", "Luksemburg", "Madryt", "Monako", "Nikozja", "Oslo", "Paryż", "Podgorica",
                     "Pristina", "Praga", "Reykjavik", "Ryga", "San Marino", "Sarajewo", "Skopje",
                     "Sofia", "Sztokholm", "Tallinn", "Tbilisi", "Tirana", "Valletta", "Vaduz", "Warszawa",
-                    "Wilno", "Wiedeń", "Zagrzeb"];
+                    "Wilno", "Wiedeń", "Zagrzeb"]);
+    const [cities2, setCities2] = useState(["Amsterdam", "Andora la Vella", "Ateny", "Belgrad", "Berlin", "Bruksela", "Budapeszt",
+                    "Bukareszt", "Chisinau", "Dublin", "Erywań", "Helsinki", "Lisbona", "Ljubljana",
+                    "Londyn", "Luksemburg", "Madryt", "Monako", "Nikozja", "Oslo", "Paryż", "Podgorica",
+                    "Pristina", "Praga", "Reykjavik", "Ryga", "San Marino", "Sarajewo", "Skopje",
+                    "Sofia", "Sztokholm", "Tallinn", "Tbilisi", "Tirana", "Valletta", "Vaduz", "Warszawa",
+                    "Wilno", "Wiedeń", "Zagrzeb"]);
     const [cityInput, setCityInput] = useState('');
+    const [cityInput2, setCityInput2] = useState('');
     const citiesRef = useRef(null);
+    const citiesRef2 = useRef(null);
     const citiesListRef = useRef(null);
+    const citiesListRef2 = useRef(null);
+    
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -59,7 +70,8 @@ export function Home() {
         }
                 
         const slidesContentF = () => {
-            switch (event.currentTarget.id) {  //na podstawie id kliknietego tytulu menu wyswietla jego div ponizej
+            switch (event.currentTarget.id) {  //na podstawie id kliknietego tytulu menu wyswietla jego div ponizej. pierwszy switch taki sam jak w return
+                                               //pierwszy switch taki sam jak w return
                 case 'onSlidesMenu1Id':
                     return (
                         <div className='onSLidesInCont1'>
@@ -78,10 +90,35 @@ export function Home() {
                                 onChange={handleChange} 
                                 value={cityInput}
                                 onClick={showList}
-                                ref={citiesRef}
-                                />
+                                ref={citiesRef}>
+                            </input>
                             <div className='cities' id='citiesId' ref={citiesListRef}>
-                                {cities.map((element, index) => <><div className='city' key={index}>{element}</div></>)}
+                                {cities.map((element, index) => 
+                                    <><div 
+                                        className='city' 
+                                        key={index} 
+                                        onClick={() => cityClick(element)}>
+                                        {element}                                        
+                                    </div></>)}
+                            </div>
+                            <img src={arrowLateral} alt='arrow'  className='arrowLateral'/>
+                            <input
+                                className='input2'
+                                type='text'
+                                placeHolder='Cel podróży'
+                                onChange={handleChange2}
+                                value={cityInput2}
+                                onClick={showList2}
+                                ref={citiesRef2}>
+                            </input>
+                            <div className='cities2' id='citiesId2' ref={citiesListRef}>
+                                {cities.map((element, index) => 
+                                    <><div 
+                                        className='city2' 
+                                        key={index} 
+                                        onClick={() => cityClick2(element)}>
+                                        {element}                                        
+                                    </div></>)}
                             </div>
                         </div>
                      </div>
@@ -104,7 +141,7 @@ export function Home() {
         setSlidesContent(slidesContentF())
     };
 
-    const checked = (event) => {
+    const checked = (event) => {// wybór radio input
         switch (event.target.id) {
             case 'radio1':
                     setChecked1(true);
@@ -122,13 +159,56 @@ export function Home() {
     const showList = () => {
             document.getElementById('citiesId').classList.remove('citiesAnimation2');
             document.getElementById('citiesId').classList.add('citiesAnimation1');      
+    };
+
+    const showList2 = () => {
+        document.getElementById('citiesId2').classList.remove('citiesAnimation2');
+        document.getElementById('citiesId2').classList.add('citiesAnimation1');      
     }
 
-    const handleChange = (event) => {
-        setCityInput(event.target.value)
-    }
+    const handleChange = (event) => {//zmienia kolejnosc listy na podstawie wpisywanych liter
+        const value = event.target.value;
+        setCityInput(value);
+        if (value === '') {
+            setCities(["Amsterdam", "Andora la Vella", "Ateny", "Belgrad", "Berlin", "Bruksela", "Budapeszt",
+                "Bukareszt", "Chisinau", "Dublin", "Erywań", "Helsinki", "Lisbona", "Ljubljana",
+                "Londyn", "Luksemburg", "Madryt", "Monako", "Nikozja", "Oslo", "Paryż", "Podgorica",
+                "Pristina", "Praga", "Reykjavik", "Ryga", "San Marino", "Sarajewo", "Skopje",
+                "Sofia", "Sztokholm", "Tallinn", "Tbilisi", "Tirana", "Valletta", "Vaduz", "Warszawa",
+                "Wilno", "Wiedeń", "Zagrzeb"]);
+        };
 
-    useEffect(() => {
+        const filteredCities = cities.filter(city => {
+            return city.toLowerCase().startsWith(value.toLowerCase())
+        });
+        const remainingCities = cities.filter(city => {
+            return !city.toLowerCase().startsWith(value.toLowerCase())
+        });
+        setCities(filteredCities.sort().concat(remainingCities.sort()));
+    };
+
+    const handleChange2 = (event) => {
+        const value = event.target.value;
+        setCityInput2(value);
+        if (value === '') {
+            setCities2(["Amsterdam", "Andora la Vella", "Ateny", "Belgrad", "Berlin", "Bruksela", "Budapeszt",
+                "Bukareszt", "Chisinau", "Dublin", "Erywań", "Helsinki", "Lisbona", "Ljubljana",
+                "Londyn", "Luksemburg", "Madryt", "Monako", "Nikozja", "Oslo", "Paryż", "Podgorica",
+                "Pristina", "Praga", "Reykjavik", "Ryga", "San Marino", "Sarajewo", "Skopje",
+                "Sofia", "Sztokholm", "Tallinn", "Tbilisi", "Tirana", "Valletta", "Vaduz", "Warszawa",
+                "Wilno", "Wiedeń", "Zagrzeb"]);
+        };
+
+        const filteredCities = cities.filter(city => {
+            return city.toLowerCase().startsWith(value.toLowerCase())
+        });
+        const remainingCities = cities.filter(city => {
+            return !city.toLowerCase().startsWith(value.toLowerCase())
+        });
+        setCities2(filteredCities.sort().concat(remainingCities.sort()));
+    }
+    
+    useEffect(() => {//zamyka liste miast po kliknieciu na container
         const closeCities = (event) => {
             if (citiesRef.current && 
                 citiesListRef.current && 
@@ -145,8 +225,21 @@ export function Home() {
         return () => {
             document.removeEventListener('click', closeCities)
         }
-    }, [])
+    }, []);
 
+    const cityClick = (element) => {//zmienia input na wybrane miasto z listy 1
+        setCityInput(element);
+        document.getElementById('citiesId').classList.remove('citiesAnimation1');
+        document.getElementById('citiesId').classList.add('citiesAnimation2'); 
+    }
+
+    const cityClick2 = (element) => {//zmienia input na wybrane miasto z listy 2
+        setCityInput2(element);
+        document.getElementById('citiesId2').classList.remove('citiesAnimation1');
+        document.getElementById('citiesId2').classList.add('citiesAnimation2'); 
+    }
+
+    
     return (
         <div className='container'>
             <Navbar />
@@ -196,16 +289,41 @@ export function Home() {
 
                         <div className='inputs'>
                             <input 
-                                className='input1'
+                                className='input'
                                 type='text' 
                                 placeholder='Miejsce wylotu' 
                                 onChange={handleChange} 
                                 value={cityInput}
                                 onClick={showList}
-                                ref={citiesRef}
-                                />
+                                ref={citiesRef}>
+                            </input>
                             <div className='cities' id='citiesId' ref={citiesListRef}>
-                                {cities.map((element, index) => <><div className='city' key={index}>{element}</div></>)}
+                                {cities.map((element, index) => 
+                                    <><div 
+                                        className='city' 
+                                        key={index} 
+                                        onClick={() => cityClick(element)}>
+                                        {element}                                        
+                                    </div></>)}
+                            </div>
+                            <img src={arrowLateral} alt='arrow'  className='arrowLateral'/>
+                            <input
+                                className='input2'
+                                type='text'
+                                placeHolder='Cel podróży'
+                                onChange={handleChange2}
+                                value={cityInput2}
+                                onClick={showList2}
+                                ref={citiesRef2}>
+                            </input>
+                            <div className='cities2' id='citiesId2' ref={citiesListRef2}>
+                                {cities2.map((element, index) => 
+                                    <><div 
+                                        className='city2' 
+                                        key={index} 
+                                        onClick={() => cityClick2(element)}>
+                                        {element}                                        
+                                    </div></>)}
                             </div>
                         </div>
                      </div>
@@ -215,43 +333,3 @@ export function Home() {
         </div>
     )
 }
-
-//lista reagujaca na wpisywane litery
-
-// const cities = [
-//     "Amsterdam",
-//     "Athens"];
-  
-//   const CitySearch = () => {
-//     const [searchTerm, setSearchTerm] = useState('');
-//     const [filteredCities, setFilteredCities] = useState(cities);
-  
-//     const handleInputChange = (event) => {
-//       const value = event.target.value.toLowerCase();
-//       setSearchTerm(value);
-  
-//       if (value === '') {
-//         setFilteredCities(cities);
-//       } else {
-//         const startsWith = cities.filter(city => city.toLowerCase().startsWith(value));
-//         const contains = cities.filter(city => !city.toLowerCase().startsWith(value) && city.toLowerCase().includes(value));
-//         setFilteredCities([...startsWith, ...contains]);
-//       }
-//     };
-  
-//     return (
-//       <div>
-//         <input
-//           type="text"
-//           value={searchTerm}
-//           onChange={handleInputChange}
-//           placeholder="Enter city name"
-//         />
-//         <ul>
-//           {filteredCities.map((city, index) => (
-//             <li key={index}>{city}</li>
-//           ))}
-//         </ul>
-//       </div>
-//     );
-//   };
