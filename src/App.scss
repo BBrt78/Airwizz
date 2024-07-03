@@ -249,14 +249,14 @@ a {
                 }
 
                 .inputs {
-                    width: 450px;
+                    width: 1000px;
                     display: flex;
                     flex-direction: row;
                     justify-content: space-between;
                     position: relative;
-
+                    border: solid 1px red;
+                    
                     .input {
-                        border-right: 0px;
                     }
 
                     .cities {
@@ -273,6 +273,11 @@ a {
                         }
                     }
 
+                    .arrowLateral {}
+
+                    .input2 {
+                    }
+
                     .cities2 {
                         width: 300px;
                         height: 400px;
@@ -281,11 +286,16 @@ a {
                         display: none;                        
                         position: absolute;
                         top: 100%;
-                        left: 52%;
+                        left: 30%;
 
                         .city2 {
                             cursor: pointer;
                         }
+                    }
+
+                    .inputB {
+                        resize: none;
+                        user-select: none;
                     }
 
                     .arrowLateral {
@@ -294,8 +304,19 @@ a {
                     }
 
                     .input2 {
-                        border-left: 0px;
                     }
+                }
+
+                .calendar {
+                    background-color: rgb(255, 255, 255);
+                    border: solid 1px red;
+                    width: 500px;
+                    height: 300px;
+                    position: relative;
+                    top: 10px;
+                    left: 510px;
+                    opacity: 0;
+                    display: none;
                 }
             }
         }

@@ -39,7 +39,17 @@ export function Home() {
     const citiesRef2 = useRef(null);
     const citiesListRef = useRef(null);
     const citiesListRef2 = useRef(null);
-    
+    // const [flight, setFlight] = useState(tomorrow);
+    const [flight2, setFlight2] = useState('');
+    const date = new Date();
+    const months = [
+        "sty", "lut", "mar", "kwi", "maj", "cze",
+        "lip", "sie", "wrz", "paź", "lis", "gru"
+      ];
+    const today = `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
+    const tomorrow = `${date.getDate() + 1} ${months[date.getMonth()]} ${date.getFullYear()}`
+    const [flight, setFlight] = useState(tomorrow);
+    const calendarRef = useRef(null);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -222,8 +232,28 @@ export function Home() {
             }
         }
         document.addEventListener('click', closeCities);
+
+        const closeCities2 = (event) => {
+            if (citiesRef2.current && 
+                citiesListRef2.current && 
+                !citiesRef2.current.contains(event.target) && 
+                !citiesListRef2.current.contains(event.target) &&
+                document.getElementById('citiesId2').classList.contains('citiesAnimation1')) 
+                {
+                document.getElementById('citiesId2').classList.remove('citiesAnimation1');
+                document.getElementById('citiesId2').classList.add('citiesAnimation2');
+                setTimeout(() => {document.getElementById('citiesId2').style.setProperty('display', 'none')}, 200);
+            }
+        }
+        document.addEventListener('click', closeCities2);
+
+        const closeCalendar = (event) => {
+            
+        }
+        
         return () => {
-            document.removeEventListener('click', closeCities)
+            document.removeEventListener('click', closeCities);
+            document.removeEventListener('click', closeCities2);
         }
     }, []);
 
@@ -239,6 +269,19 @@ export function Home() {
         document.getElementById('citiesId2').classList.add('citiesAnimation2'); 
     }
 
+    const flightDate = () => {
+        if (!document.getElementById('calendar').classList.contains('popupAnimation1')) {
+            document.getElementById('calendar').classList.remove('popupAnimation2');
+            document.getElementById('calendar').classList.add('popupAnimation1');
+        } else if (!document.getElementById('calendar').classList.contains('popupAnimation2')) {
+            document.getElementById('calendar').classList.remove('popupAnimation1');
+            document.getElementById('calendar').classList.add('popupAnimation2');
+        }
+    }
+
+    const flightDate2 = () => {
+
+    }
     
     return (
         <div className='container'>
@@ -310,7 +353,7 @@ export function Home() {
                             <input
                                 className='input2'
                                 type='text'
-                                placeHolder='Cel podróży'
+                                placeholder='Cel podróży'
                                 onChange={handleChange2}
                                 value={cityInput2}
                                 onClick={showList2}
@@ -325,6 +368,27 @@ export function Home() {
                                         {element}                                        
                                     </div></>)}
                             </div>
+
+                            <textarea
+                                className='inputB'
+                                rows='2'
+                                placeholder='wyloty'
+                                value={`Wyloty\n${flight}`}
+                                onClick={flightDate}
+                                onMouseDown={(e) => e.preventDefault()}
+                                ref={calendarRef}>
+                            </textarea>
+                            <img src={arrowLateral} alt='arrow'  className='arrowLateral'/>
+                            <input
+                                className='inputB2'
+                                type='text'
+                                placeholder='Przylot'
+                                value={flight2}
+                                onClick={flightDate2}>
+                            </input>
+                        </div>
+                        <div className='calendar' id='calendar'>
+                                    calendar
                         </div>
                      </div>
                     }

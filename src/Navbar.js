@@ -234,7 +234,7 @@ const showLogin = () => {//okienko login
     setTimeout(displayNone, 200);
 }
                 
-    return (//wysokosc menu rozwijanego, pasek miedzy nim a nav. poprawic
+    return (
         <div className={menuVisible ? '' : 'nav'} ref={navbarRef}>
             <Link to='/'>
                 <img src={logoWhite} alt='logo' className='logo' />
